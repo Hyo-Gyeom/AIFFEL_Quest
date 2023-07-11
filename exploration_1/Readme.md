@@ -22,6 +22,7 @@
 2. 코드의 작동 방식에 대한 개선 방법을 주석으로 기록합니다.
 3. 참고한 링크 및 ChatGPT 프롬프트 명령어가 있다면 주석으로 남겨주세요.
 ```python
+## Diabetes
 # 데이터 가져오기
 from sklearn.datasets import load_diabetes
 from sklearn.model_selection import train_test_split
@@ -87,6 +88,83 @@ import matplotlib.pyplot as plt
 
 plt.scatter(X_test[:, 0], y_test)
 plt.scatter(X_test[:, 0], prediction)
+plt.show()
+
+## Bicycle
+#데이터 가져오기
+from sklearn import model_selection
+import pandas as pd
+import numpy as np
+
+# 데이터 로드
+data_url = "~/data/data/bike-sharing-demand/train.csv"
+df = pd.read_csv(data_url)
+df
+
+#연,월,일,시,분,초 6개의 칼럼 생성
+df['datetime'] = pd.to_datetime(df['datetime'])  #datetime 칼럼을 datetime 자료형으로 변환
+df['year'] = df['datetime'].dt.year
+df['month'] = df['datetime'].dt.month
+df['day'] = df['datetime'].dt.day
+df['hour'] = df['datetime'].dt.hour
+df['min'] = df['datetime'].dt.minute
+df['second'] = df['datetime'].dt.second
+
+#year, month, hour, minute, second 데이터 시각화
+import seaborn as sns
+
+plt.figure(figsize=(20, 8))
+
+plt.subplot(3, 2, 1)
+sns.countplot(data=df, x='year')
+plt.subplot(3, 2, 2)
+sns.countplot(data=df, x='month')
+plt.subplot(3, 2, 3)
+sns.countplot(data=df, x='day')
+plt.subplot(3, 2, 4)
+sns.countplot(data=df, x='hour')
+plt.subplot(3, 2, 5)
+sns.countplot(data=df, x='min')
+plt.subplot(3, 2, 6)
+sns.countplot(data=df, x='second')
+plt.show()
+
+#x, y 컬럼 선택 (오차값 조정을 위해 feature 선택, 필요없는 feature는 제외했음)
+x = df[['month', 'holiday', 'workingday', 'temp', 'humidity', 'windspeed', 'hour']].to_numpy()
+y = df['count'].to_numpy()
+
+#sklearn 활용하여 train/test 분리
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+#모델 학습
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+#예측값 출력
+predictions = model.predict(X_test)
+predictions
+
+#손실함수값 계산
+from sklearn.metrics import mean_squared_error
+
+rmse = mean_squared_error(y_test, predictions) ** 0.5
+rmse
+
+#예측결과 시각화
+plt.scatter(X_test[:, 3], y_test, label="true")
+plt.scatter(X_test[:, 3], predictions, label="pred")
+plt.xlabel('temp')
+plt.legend()
+plt.show()
+
+plt.scatter(X_test[:, 4], y_test, label="true")
+plt.scatter(X_test[:, 4], predictions, label="pred")
+plt.xlabel('humidity')
+plt.legend()
 plt.show()
 ```
 
