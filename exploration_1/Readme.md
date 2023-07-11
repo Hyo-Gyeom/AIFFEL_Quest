@@ -78,7 +78,7 @@ for i in range(1, epoch + 1):
     if i % 1000 == 0:
         print('Iteration %d : Loss %0.4f' % (i, L))
 
-#성능 확인
+#성능 확인 (MSE 손실함수값 3000 이하 달성)
 prediction = model(X_test, W, b)
 mse = loss(X_test, W, b, y_test)
 mse
@@ -89,7 +89,7 @@ import matplotlib.pyplot as plt
 plt.scatter(X_test[:, 0], y_test)
 plt.scatter(X_test[:, 0], prediction)
 plt.show()
-
+-----------------------------------------------------------------------------------------------------------------
 ## Bicycle
 #데이터 가져오기
 from sklearn import model_selection
@@ -148,7 +148,7 @@ model.fit(X_train, y_train)
 predictions = model.predict(X_test)
 predictions
 
-#손실함수값 계산
+#손실함수값 계산 (RMSE 150 이하 달성)
 from sklearn.metrics import mean_squared_error
 
 rmse = mean_squared_error(y_test, predictions) ** 0.5
