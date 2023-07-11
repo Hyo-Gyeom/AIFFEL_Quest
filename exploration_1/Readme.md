@@ -174,3 +174,4 @@ plt.show()
 import numpy as np
 X = np.array(df_X)
 y = np.array(df_y)
+*노드에 따라 위의 개선사항을 적었으나, 이미 데이터 타입이 numpy array어서 개선할 필요가 없어보임.
