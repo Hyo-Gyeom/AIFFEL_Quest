@@ -22,25 +22,77 @@
 2. 코드의 작동 방식에 대한 개선 방법을 주석으로 기록합니다.
 3. 참고한 링크 및 ChatGPT 프롬프트 명령어가 있다면 주석으로 남겨주세요.
 ```python
-# 사칙 연산 계산기
-class calculator:
-    # 예) init의 역할과 각 매서드의 의미를 서술
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
-    
-    # 예) 덧셈과 연산 작동 방식에 대한 서술
-    def add(self):
-        result = self.first + self.second
-        return result
+# 데이터 가져오기
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+import numpy as np
 
-a = float(input('첫번째 값을 입력하세요.')) 
-b = float(input('두번째 값을 입력하세요.')) 
-c = calculator(a, b)
-print('덧셈', c.add()) 
+diabetes = load_diabetes()
+
+#모델에 입력할 데이터, 예측할 데이터
+df_x = diabetes.data
+df_y = diabetes.target
+
+#data 특성의 개수 f
+f = len(df_x[1])
+    
+#train 데이터와 test 데이터 분리
+X_train, X_test, y_train, y_test = train_test_split(df_x, df_y, test_size=0.2, random_state=42)
+
+#가중치 W와 b
+W = np.random.rand(f)
+b = np.random.rand()
+
+#모델 구현
+def model(x_data, weight, bias):
+    predictions = 0
+    for i in range(f):
+        predictions += x_data[:, i] * weight[i]
+    predictions += bias
+    return predictions
+
+#손실함수 정의
+def loss(x_data, weight, bias, y_data):
+    predictions = model(x_data, weight, bias)
+    return ((predictions - y_data) ** 2).mean()
+
+#gradient 함수 구현
+def gradient(x_data, weight, bias, y_data):
+    y_pred = model(x_data, weight, bias)
+    dW = (1 / len(y_data)) * 2 * x_data.T.dot(y_pred - y_data)
+    db = 2 * (y_pred - y_data).mean()
+    return dW, db
+
+#하이퍼파라미터(learning rate) 설정
+LEARNING_RATE = 0.1
+
+losses = []
+epoch = 10000
+for i in range(1, epoch + 1):
+    dW, db = gradient(X_train, W, b, y_train)
+    W -= LEARNING_RATE * dW
+    b -= LEARNING_RATE * db
+    L = loss(X_train, W, b, y_train)
+    losses.append(L)
+    if i % 1000 == 0:
+        print('Iteration %d : Loss %0.4f' % (i, L))
+
+#성능 확인
+prediction = model(X_test, W, b)
+mse = loss(X_test, W, b, y_test)
+mse
+
+#데이터 시각화
+import matplotlib.pyplot as plt
+
+plt.scatter(X_test[:, 0], y_test)
+plt.scatter(X_test[:, 0], prediction)
+plt.show()
 ```
 
 # 참고 링크 및 코드 개선
 ```python
-# 코드 리뷰 시 참고한 링크가 있다면 링크와 간략한 설명을 첨부합니다.
-# 코드 리뷰를 통해 개선한 코드가 있다면 코드와 간략한 설명을 첨부합니다.
+# 노드 2-1.(2),(3) : df_X, df_y 값 numpy array로 변환하기
+import numpy as np
+X = np.array(df_X)
+y = np.array(df_y)
