@@ -19,7 +19,7 @@
 
 # 전체 코드의 pipeline이 알기 쉽고 직관적이었음
 1. 데이터 불러오기 및 형변환
-2. 데이터 분포 확인 후 모델링
+2. 데이터 분포 확인 후 모델링 (모델링 부분은 코드 생략)
 ```python
 # 
 train_data_path = join('data', 'train.csv')
