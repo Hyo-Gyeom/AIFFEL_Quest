@@ -1,6 +1,6 @@
 # AIFFEL Campus Online 5th Code Peer Review Templete
 - 코더 : 이효겸
-- 리뷰어 : 본인의 이름을 작성하세요.
+- 리뷰어 : 신유진
 
 
 # PRT(PeerReviewTemplate) 
@@ -11,9 +11,9 @@
 - [X] 주석을 보고 작성자의 코드가 이해되었나요?
   > 코드에 각 주석이 task별로 쪼개져 있어서 잘 이해가 감
 - [X] 코드가 에러를 유발할 가능성이 없나요?
-  >없는 거 같음
+  > 없는 거 같음
 - [X] 코드 작성자가 코드를 제대로 이해하고 작성했나요?
-  > 넵
+  > 넵, 주석이 잘 기록되어 있고, 코드의 전체적인 flow와 노드에서 언급되어있는 최종 보고 부분까지 잘 정리되어있다. 
 - [X] 코드가 간결한가요?
   > 함수단위로 있어서 간결
 
@@ -22,22 +22,9 @@
 2. 코드의 작동 방식에 대한 개선 방법을 주석으로 기록합니다.
 3. 참고한 링크 및 ChatGPT 프롬프트 명령어가 있다면 주석으로 남겨주세요.
 ```python
-# 사칙 연산 계산기
-class calculator:
-    # 예) init의 역할과 각 매서드의 의미를 서술
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
-    
-    # 예) 덧셈과 연산 작동 방식에 대한 서술
-    def add(self):
-        result = self.first + self.second
-        return result
-
-a = float(input('첫번째 값을 입력하세요.')) 
-b = float(input('두번째 값을 입력하세요.')) 
-c = calculator(a, b)
-print('덧셈', c.add()) 
+# 다음과 같이 함수 2개가 있어서 알아보기 쉬웠음.
+def detector_landmark(img):
+def cat_sticker(landmark, img): 
 ```
 
 # 참고 링크 및 코드 개선
