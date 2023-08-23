@@ -1,43 +1,34 @@
 # AIFFEL Campus Online 5th Code Peer Review Templete
 - 코더 : 이효겸
-- 리뷰어 : 본인의 이름을 작성하세요.
+- 리뷰어 : 김연수
 
 
 # PRT(PeerReviewTemplate) 
 각 항목을 스스로 확인하고 토의하여 작성한 코드에 적용합니다.
 
 - [X] 코드가 정상적으로 동작하고 주어진 문제를 해결했나요?
-  
-- [ ] 주석을 보고 작성자의 코드가 이해되었나요?
-  > 위 항목에 대한 근거 작성 필수
-- [ ] 코드가 에러를 유발할 가능성이 없나요?
-  >위 항목에 대한 근거 작성 필수
-- [ ] 코드 작성자가 코드를 제대로 이해하고 작성했나요?
-  > 위 항목에 대한 근거 작성 필수
-- [ ] 코드가 간결한가요?
-  > 위 항목에 대한 근거 작성 필수
+  네, 정상적으로 동작하여 문제를 해결한 것으로 보입니다.
+- [X] 주석을 보고 작성자의 코드가 이해되었나요?
+  > 네, 전체적인 코드를 이해하는 데에 도움이 되었습니다.
+- [X] 코드가 에러를 유발할 가능성이 없나요?
+  > 에러없이 동작하는 것으로 보입니다.
+- [X] 코드 작성자가 코드를 제대로 이해하고 작성했나요?
+  > 작성된 코드와 결과를 보니, 전반적인 이해를 바탕으로 코드를 작성하신 것 같습니다.
+- [X] 코드가 간결한가요?
+  > 네, 간결합니다.
 
 # 예시
-1. 코드의 작동 방식을 주석으로 기록합니다.
-2. 코드의 작동 방식에 대한 개선 방법을 주석으로 기록합니다.
-3. 참고한 링크 및 ChatGPT 프롬프트 명령어가 있다면 주석으로 남겨주세요.
+- 주석이 적혀있어 코드 이해에 도움이 되었습니다.
 ```python
-# 사칙 연산 계산기
-class calculator:
-    # 예) init의 역할과 각 매서드의 의미를 서술
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
-    
-    # 예) 덧셈과 연산 작동 방식에 대한 서술
-    def add(self):
-        result = self.first + self.second
-        return result
+X = np.array([model.wv[word] for word in attributes[0]])
+Y = np.array([model.wv[word] for word in attributes[1]])
 
-a = float(input('첫번째 값을 입력하세요.')) 
-b = float(input('두번째 값을 입력하세요.')) 
-c = calculator(a, b)
-print('덧셈', c.add()) 
+for i in range(len(genre_name)-1):
+    # i + 1로 이미 계산된 값은 하지 않음 - 좌하단이 0
+    for j in range(i + 1, len(genre_name)):
+        A = np.array([model.wv[word] for word in attributes[i]])
+        B = np.array([model.wv[word] for word in attributes[j]])
+        matrix[i][j] = weat_score(X, Y, A, B)
 ```
 
 # 참고 링크 및 코드 개선
